@@ -21,39 +21,35 @@ const Cart = (): JSX.Element => {
   const { cart, removeProduct, updateProductAmount } = useCart();
 
   const cartFormatted = cart.map((product) => ({
-    // TODO
-    ...product, //recupero o array de produtos
-    priceFormatted: formatPrice(product.price), //exibo o valor do produto formatado no carrinho
-    subtotal: formatPrice(product.price * product.amount), // total de produto x quantidade no carrinho
+    ...product,
+    priceFormatted: formatPrice(product.price),
+    subtotal: formatPrice(product.price * product.amount),
   }));
   const total = formatPrice(
-    cart.reduce((sumTotal, product) => {
-      // TODO
+    cartFormatted.reduce((sumTotal, product) => {
       sumTotal += product.price * product.amount;
+
       return sumTotal;
     }, 0)
   );
 
   function handleProductIncrement(product: Product) {
-    // TODO
-    const IncrementProducts = {
+    const IncrementArguments = {
       productId: product.id,
-      amount: product.amount++,
+      amount: product.amount + 1,
     };
-    updateProductAmount(IncrementProducts);
+    updateProductAmount(IncrementArguments);
   }
 
   function handleProductDecrement(product: Product) {
-    // TODO
-    const DecrementProducts = {
+    const IncrementArguments = {
       productId: product.id,
-      amount: product.amount++,
+      amount: product.amount - 1,
     };
-    updateProductAmount(DecrementProducts);
+    updateProductAmount(IncrementArguments);
   }
 
   function handleRemoveProduct(productId: number) {
-    // TODO
     removeProduct(productId);
   }
 
@@ -120,6 +116,7 @@ const Cart = (): JSX.Element => {
           ))}
         </tbody>
       </ProductTable>
+
       <footer>
         <button type="button">Finalizar pedido</button>
 
